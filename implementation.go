@@ -10,6 +10,10 @@ func PostfixToInfix(input string) (string, error) {
 	operators := []string{"+", "-", "*", "/", "^"}
 	symbols := strings.Fields(input)
 
+	if input == "" {
+		return "", fmt.Errorf("empty input")
+	}
+
 	for key, value := range symbols {
 		_, err := strconv.Atoi(value)
 
@@ -28,7 +32,9 @@ func PostfixToInfix(input string) (string, error) {
 		}
 
 		tmp := symbols[i-2] + symbols[i] + symbols[i-1]
-		if includes(operators[0:2], symbols[i]) {
+		if includes(operators[0:2], symbols[i]) &&
+			len(symbols) > 3 {
+
 			tmp = "(" + tmp + ")"
 		}
 
@@ -37,7 +43,7 @@ func PostfixToInfix(input string) (string, error) {
 		i = 0
 	}
 
-	return symbols[0][1 : len(symbols[0])-1], nil
+	return symbols[0], nil
 }
 
 func includes(sli []string, item string) bool {
