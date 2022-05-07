@@ -9,8 +9,8 @@ import (
 
 var (
 	inputExpression = flag.String("e", "", "Expression to compute")
-	inputDirectory = flag.String("f", "", "Directory of the expression to compute")
-	outputDirectory = flag.String("o", "", "Directory to place the output in")
+	inputDirectory = flag.String("f", "", "File path to the input file")
+	outputDirectory = flag.String("o", "", "Path to the file to place the output in")
 )
 
 func main() {
@@ -18,6 +18,10 @@ func main() {
 
 	if *inputExpression != "" && *inputDirectory != "" {
 		panic("only one flag can be used for input specifying")
+	}
+
+	if *inputExpression == "" && *inputDirectory == "" {
+		panic("no input value was specified")
 	}
 
 	handler := &lab2.ComputeHandler {
