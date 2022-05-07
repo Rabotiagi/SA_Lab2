@@ -29,7 +29,7 @@ func ExampleComputing() {
 	}
 
 	// Output:
-	// (4-2)*3+5
+	// (4-2)*3+6
 }
 
 func TestErrorHandling(t *testing.T) {
